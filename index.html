@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Rudhere Santana</title>
+    <!-- Carregamento do Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carregamento do Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Configuração de Fonte Inter e estilos base */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        :root {
+            --primary-color: #3b82f6; /* Blue 500 */
+            --secondary-color: #1f2937; /* Gray 800 */
+            --background-color: #0f172a; /* Slate 900 */
+            --text-color: #f8fafc; /* Slate 50 */
+            --card-color: #1e293b; /* Slate 800 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 9999px; /* rounded-full */
+        }
+        /* Estilos específicos para a galeria do portfólio */
+        .portfolio-item {
+            display: flex;
+            flex-direction: column;
+            border-radius: 0.75rem; /* rounded-xl */
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.5), 0 8px 10px -6px rgba(59, 130, 246, 0.3);
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: auto;
+            max-height: 400px; /* Limite de altura para uniformidade */
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navegação (Header) -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo/Nome -->
+            <a href="#hero" class="text-3xl font-extrabold text-blue-400 hover:text-blue-300 transition duration-300 rounded-lg p-1">
+                &lt;RudhereSantana/&gt;
+            </a>
+            <!-- Menu de Navegação (Esconde em mobile, aparece em desktop) -->
+            <nav class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="#hero" class="text-slate-300 hover:text-blue-400 transition duration-300 p-2 rounded-lg">Início</a>
+                <a href="#about" class="text-slate-300 hover:text-blue-400 transition duration-300 p-2 rounded-lg">Sobre Mim</a>
+                <a href="#skills" class="text-slate-300 hover:text-blue-400 transition duration-300 p-2 rounded-lg">Habilidades</a>
+                <a href="#experience" class="text-slate-300 hover:text-blue-400 transition duration-300 p-2 rounded-lg">Experiência</a>
+                <!-- LINK ATUALIZADO: PORTFÓLIO DESIGN -->
+                <a href="#design-portfolio" class="text-slate-300 hover:text-blue-400 transition duration-300 p-2 rounded-lg">Portfólio Design</a>
+                <a href="#contact" class="text-slate-300 hover:text-blue-400 transition duration-300 p-2 rounded-lg">Contacto</a>
+            </nav>
+            <!-- Botão de Menu para Mobile (Opcional, mas recomendado para navegação moderna) -->
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-slate-300 hover:text-blue-400 transition duration-300">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Menu Dropdown Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 border-t border-slate-700">
+            <nav class="flex flex-col space-y-2 p-4 text-center text-lg">
+                <a href="#hero" class="block py-2 text-slate-300 hover:bg-slate-700 rounded-lg">Início</a>
+                <a href="#about" class="block py-2 text-slate-300 hover:bg-slate-700 rounded-lg">Sobre Mim</a>
+                <a href="#skills" class="block py-2 text-slate-300 hover:bg-slate-700 rounded-lg">Habilidades</a>
+                <a href="#experience" class="block py-2 text-slate-300 hover:bg-slate-700 rounded-lg">Experiência</a>
+                <!-- LINK ATUALIZADO MOBILE: PORTFÓLIO DESIGN -->
+                <a href="#design-portfolio" class="block py-2 text-slate-300 hover:bg-slate-700 rounded-lg">Portfólio Design</a>
+                <a href="#contact" class="block py-2 text-slate-300 hover:bg-slate-700 rounded-lg">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="min-h-screen">
+        <!-- Seção Hero (Introdução) -->
+        <section id="hero" class="pt-24 pb-16 md:pt-32 md:pb-24 flex items-center bg-slate-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <!-- Texto de Introdução -->
+                    <div class="md:w-3/5 text-center md:text-left mb-10 md:mb-0">
+                        <p class="text-blue-400 text-xl md:text-2xl font-semibold mb-3">Olá, o meu nome é</p>
+                        <h1 class="text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-white mb-4">
+                            Rudhere Santana
+                        </h1>
+                        <h2 class="text-3xl md:text-4xl text-slate-300 font-light mb-8">
+                            Profissional de Suporte Técnico & Automação com IA
+                        </h2>
+                        <p class="text-slate-400 text-lg max-w-xl mb-10">
+                            Profissional com experiência em atendimento ao usuário, infraestrutura e resolução de problemas. Atuação em Windows, Linux, redes, hardware e automações via n8n e APIs para otimização operacional.
+                        </p>
+                        <a href="#experience" class="inline-block bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                            Ver a Minha Experiência <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    <!-- Imagem/Avatar (Placeholder) -->
+                    <div class="md:w-2/5 flex justify-center">
+                        <div class="w-64 h-64 md:w-80 md:h-80 bg-slate-800 rounded-full border-4 border-blue-500 flex items-center justify-center overflow-hidden shadow-2xl">
+                            <!-- Use a sua foto aqui. Exemplo de placeholder: -->
+                            <img src="https://placehold.co/320x320/1e293b/94a3b8?text=Rudhere" alt="Foto de Perfil" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Sobre Mim -->
+        <section id="about" class="py-20 bg-slate-800/50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+                <h3 class="section-title text-center mx-auto mb-10">Sobre Mim</h3>
+                
+                <div class="bg-card-color p-8 md:p-10 rounded-xl shadow-2xl border border-slate-700">
+                    <p class="text-slate-300 text-lg mb-6">
+                        Sou um profissional de Suporte Técnico focado na otimização de processos e na excelência do atendimento ao usuário. A minha atuação abrange desde a gestão de infraestrutura (Windows, Linux, Redes, Hardware) até a implementação de soluções de vanguarda.
+                    </p>
+                    <p class="text-slate-300 text-lg mb-6">
+                        Sou especializado em **Automação com n8n e integração via APIs**, aplicando também conceitos de **IA** para desenvolver soluções que aumentam a eficiência operacional. A minha experiência como Coordenador e Líder de Setor me deu uma visão clara sobre a importância da liderança de equipe, organização de processos e comunicação eficaz.
+                    </p>
+                    <p class="text-slate-300 text-lg">
+                        Tenho proficiência em Power BI para análise de dados e conhecimentos básicos em Python e HTML. Tenho interesse e formação em conceitos básicos de UX Design, buscando sempre equilibrar a funcionalidade técnica com uma ótima experiência de usuário.
+                    </p>
+
+                    <div class="mt-8 text-center md:text-left">
+                        <a href="uploaded:Rudhere_Santana.pdf" target="_blank" class="inline-block text-blue-400 hover:text-blue-300 font-semibold border-b-2 border-blue-400 pb-1 transition duration-300">
+                            Ver Currículo Completo <i class="fas fa-download ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Habilidades -->
+        <section id="skills" class="py-20 bg-slate-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="section-title">Habilidades Técnicas e Comportamentais</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Hard Skills (Técnicas) -->
+                    <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700 hover:border-blue-500 transition duration-300">
+                        <h4 class="text-2xl font-bold text-blue-400 mb-4"><i class="fas fa-laptop-code mr-2"></i> Infraestrutura e Automação</h4>
+                        <ul class="space-y-2 text-slate-300 list-disc list-inside">
+                            <li>Windows e Linux</li>
+                            <li>Redes (TCP/IP, DHCP, DNS)</li>
+                            <li>Hardware e manutenção</li>
+                            <li>Automação com n8n e integração via APIs</li>
+                            <li>open IA API e Low-code</li>
+                        </ul>
+                    </div>
+                    <!-- Hard Skills (Dados e Sistemas) -->
+                    <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700 hover:border-blue-500 transition duration-300">
+                        <h4 class="text-2xl font-bold text-blue-400 mb-4"><i class="fas fa-chart-bar mr-2"></i> Dados e Sistemas</h4>
+                        <ul class="space-y-2 text-slate-300 list-disc list-inside">
+                            <li>Power BI e análise de dados</li>
+                            <li>Microsoft Office (Word, Excel)</li>
+                            <li>AnyDesk</li>
+                            <li>Python (básico) e HTML (básico)</li>
+                        </ul>
+                    </div>
+                    <!-- Soft Skills (Comportamentais) -->
+                    <div class="bg-slate-800 p-6 rounded-xl shadow-xl border border-slate-700 hover:border-blue-500 transition duration-300">
+                        <h4 class="text-2xl font-bold text-blue-400 mb-4"><i class="fas fa-users-cog mr-2"></i> Soft Skills</h4>
+                        <ul class="space-y-2 text-slate-300 list-disc list-inside">
+                            <li>Liderança de equipe</li>
+                            <li>Gestão de processos e organização</li>
+                            <li>Comunicação clara e Adaptabilidade</li>
+                            <li>Inglês e Espanhol (Intermediário)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Experiência Profissional -->
+        <section id="experience" class="py-20 bg-slate-800/50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="section-title">Experiência Profissional</h3>
+
+                <div class="space-y-10">
+                    <!-- Experiência 1: Coordenador, Grupo Dádiva -->
+                    <div class="bg-slate-800 rounded-xl shadow-xl p-6 md:p-8 border border-slate-700 transition duration-300 hover:border-blue-500">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h4 class="text-2xl font-bold text-white">Coordenador, Grupo Dádiva</h4>
+                            <p class="text-blue-400 font-semibold text-lg mt-1 md:mt-0">Abr 2025 – Nov 2025</p>
+                        </div>
+                        <p class="text-slate-400 text-lg mb-4">
+                            Liderança de equipe e organização de processos, com foco em marketing digital e otimização operacional.
+                        </p>
+                        <ul class="text-slate-300 space-y-2 list-disc list-inside ml-4">
+                            <li>Desenvolvimento de automações e soluções com IA para otimização operacional.</li>
+                            <li>Marketing digital e criação de conteúdo.</li>
+                            <li>Copywriting para campanhas e comunicações internas.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Experiência 2: Líder de Setor, Ultrabox -->
+                    <div class="bg-slate-800 rounded-xl shadow-xl p-6 md:p-8 border border-slate-700 transition duration-300 hover:border-blue-500">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h4 class="text-2xl font-bold text-white">Líder de Setor, Ultrabox</h4>
+                            <p class="text-blue-400 font-semibold text-lg mt-1 md:mt-0">Dez 2021 – Dez 2024</p>
+                        </div>
+                        <p class="text-slate-400 text-lg mb-4">
+                            Gestão do Service Desk, aplicando práticas ITIL e gerenciamento de incidentes para melhoria contínua de processos.
+                        </p>
+                        <ul class="text-slate-300 space-y-2 list-disc list-inside ml-4">
+                            <li>Gerenciei o Service Desk, aplicando práticas ITIL e realizando gerenciamento de incidentes.</li>
+                            <li>Produção de documentação técnica para suporte e processos internos.</li>
+                            <li>Trabalho em equipe para garantir a eficiência operacional e resolução de conflitos.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Experiência 3: Suporte Técnico, Autônomo -->
+                    <div class="bg-slate-800 rounded-xl shadow-xl p-6 md:p-8 border border-slate-700 transition duration-300 hover:border-blue-500">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                            <h4 class="text-2xl font-bold text-white">Suporte Técnico, Autônomo</h4>
+                            <p class="text-blue-400 font-semibold text-lg mt-1 md:mt-0">Dez 2016 – Dez 2018</p>
+                        </div>
+                        <p class="text-slate-400 text-lg mb-4">
+                            Prestação de serviços de manutenção de TI, redes e suporte técnico.
+                        </p>
+                        <ul class="text-slate-300 space-y-2 list-disc list-inside ml-4">
+                            <li>Manutenção de hardware e software.</li>
+                            <li>Configuração de redes e solução de problemas de conectividade.</li>
+                            <li>Suporte remoto e presencial ao usuário.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- NOVA SEÇÃO: Portfólio de Design & Marketing -->
+        <section id="design-portfolio" class="py-20 bg-slate-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="section-title">Portfólio de Design & Marketing</h3>
+                
+                <p class="text-slate-300 text-lg mb-10 max-w-3xl">
+                    Demonstração prática de competências em Design Gráfico, UX/UI e criação de conteúdo visual e estratégico para campanhas de Marketing Digital.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Item 1: Design de Sobrancelhas (Antes/Depois) -->
+                    <div class="portfolio-item bg-slate-800 border border-slate-700">
+                        <img src="uploaded:Sem título-5.jpg" alt="Design de Sobrancelhas Antes e Depois" class="h-64 object-cover">
+                        <div class="p-4 flex-grow">
+                            <h4 class="text-xl font-bold text-blue-400 mb-2">Campanha Silune - Transformação</h4>
+                            <p class="text-slate-400 text-sm">Design gráfico para redes sociais focado em transformação e call-to-action. Uso de contraste para realçar o benefício do serviço.</p>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2">Design Gráfico</span>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2 ml-2">Marketing</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2: Cardápio Samambaia -->
+                    <div class="portfolio-item bg-slate-800 border border-slate-700">
+                        <img src="uploaded:Sem título-7.jpg" alt="Cardápio de Serviços de Sobrancelhas - Samambaia" class="h-64 object-cover">
+                        <div class="p-4 flex-grow">
+                            <h4 class="text-xl font-bold text-blue-400 mb-2">Campanha Silune - Preços (Samambaia)</h4>
+                            <p class="text-slate-400 text-sm">Criação de cardápio de serviços com preços segmentados por localização. Foco na clareza da informação e estética da marca.</p>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2">Design Editorial</span>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2 ml-2">Conteúdo Segmentado</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3: Layout UI/UX (Coffee Shop) -->
+                    <div class="portfolio-item bg-slate-800 border border-slate-700">
+                        <!-- CAMINHO CORRIGIDO para garantir o carregamento do arquivo com ID específico -->
+                        <img src="uploaded:Escape to Our Cozy Coffee Shop_ Indulge in….jpg-345fb2b2-f365-4477-98eb-dbd8c6ff9f4c" alt="Layout de Website para Coffee Shop" class="h-64 object-cover">
+                        <div class="p-4 flex-grow">
+                            <h4 class="text-xl font-bold text-blue-400 mb-2">Wireframe/Design de UI/UX (Coffee)</h4>
+                            <p class="text-slate-400 text-sm">Demonstração de competências em layout, hierarquia visual e princípios de User Interface (UI) e User Experience (UX).</p>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2">UX/UI Design</span>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2 ml-2">Web Design</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Design de Sobrancelhas (Com Texto Central) -->
+                    <div class="portfolio-item bg-slate-800 border border-slate-700">
+                        <img src="uploaded:Sem título-4.jpg" alt="Design de Sobrancelhas com texto central 'Realce a beleza'" class="h-64 object-cover">
+                        <div class="p-4 flex-grow">
+                            <h4 class="text-xl font-bold text-blue-400 mb-2">Campanha Silune - Copywriting Visual</h4>
+                            <p class="text-slate-400 text-sm">Post focado em Copywriting e impacto visual. A tipografia e o logo metálico reforçam a qualidade e o apelo da marca.</p>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2">Copywriting</span>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2 ml-2">Branding</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: Cardápio Guará -->
+                    <div class="portfolio-item bg-slate-800 border border-slate-700">
+                        <img src="uploaded:Sem título-6.jpg" alt="Cardápio de Serviços de Sobrancelhas - Guará" class="h-64 object-cover">
+                        <div class="p-4 flex-grow">
+                            <h4 class="text-xl font-bold text-blue-400 mb-2">Campanha Silune - Preços (Guará)</h4>
+                            <p class="text-slate-400 text-sm">Variação do cardápio de serviços ajustado para a tabela de preços da unidade Guará, demonstrando flexibilidade na produção.</p>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2">Design Adaptativo</span>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2 ml-2">Gestão de Conteúdo</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 6: Logo/Branding Silune (Placeholder para branding) -->
+                    <div class="portfolio-item bg-slate-800 border border-slate-700">
+                        <img src="uploaded:Sem título-1.jpg" alt="Logo da marca Silune" class="h-64 object-contain p-4 bg-white">
+                        <div class="p-4 flex-grow">
+                            <h4 class="text-xl font-bold text-blue-400 mb-2">Criação de Marca (Silune)</h4>
+                            <p class="text-slate-400 text-sm">Exemplo de trabalho de identidade visual, tipografia e tratamento de logo com efeito metálico (rose gold) para apelo premium.</p>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2">Identidade Visual</span>
+                            <span class="inline-block bg-blue-900 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full mt-2 ml-2">Branding</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Contacto -->
+        <section id="contact" class="py-20 bg-slate-800/50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
+                <h3 class="section-title text-center mx-auto mb-10">Entre em Contacto</h3>
+
+                <p class="text-center text-slate-300 text-lg mb-8">
+                    Se tem uma oportunidade, um projeto interessante ou simplesmente quer dizer Olá, a minha caixa de entrada está sempre aberta.
+                </p>
+
+                <div class="flex justify-center space-x-8 text-3xl mb-12">
+                    <a href="mailto:rudhere@gmail.com" class="text-blue-400 hover:text-blue-300 transition duration-300" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/rudherenome" target="_blank" class="text-blue-400 hover:text-blue-300 transition duration-300" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="tel:+5561995829845" class="text-blue-400 hover:text-blue-300 transition duration-300" aria-label="Telefone (61 9 9582-9845)">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    <!-- Mantido GitHub e Twitter/X como placeholders, caso o usuário queira adicioná-los. -->
+                    <a href="#" target="_blank" class="text-slate-500 hover:text-white transition duration-300" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                
+                <!-- Formulário de Contacto (Simples) -->
+                <form action="#" class="space-y-6 bg-slate-800 p-8 rounded-xl shadow-2xl border border-slate-700">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-slate-300 mb-1">Nome</label>
+                        <input type="text" id="name" name="name" required
+                            class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+                            placeholder="O seu nome">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-300 mb-1">Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+                            placeholder="seuemail@exemplo.com">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-slate-300 mb-1">Mensagem</label>
+                        <textarea id="message" name="message" rows="5" required
+                            class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+                            placeholder="Como posso ajudá-lo?"></textarea>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition duration-300 hover:scale-[1.01] flex items-center justify-center">
+                        Enviar Mensagem <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                    <!-- Nota: Para um formulário funcional, precisará de um serviço de backend (como Formspree, Netlify Forms, ou um servidor próprio) -->
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-6">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500">
+            <p>&copy; 2025 - 2026 Rudhere Santana. Todos os direitos reservados. Localização: Brasília - DF</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript para a navegação mobile
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            // Alterna a classe 'hidden' para mostrar/esconder o menu
+            menu.classList.toggle('hidden');
+            
+            // Alternar o ícone de barras/fechar
+            const icon = this.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Fechar o menu mobile ao clicar num link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.getElementById('mobile-menu');
+                const button = document.getElementById('mobile-menu-button');
+                menu.classList.add('hidden');
+                button.querySelector('i').classList.remove('fa-times');
+                button.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Animação de scroll suave para os links de navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
