@@ -8,25 +8,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Carregamento do Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Configuração Customizada do Tailwind: Adiciona as cores primárias e a fonte Inter -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0b2d4b',    /* Azul Escuro */
+                        'secondary': '#1f5787',  /* Azul Médio */
+                        'background-light': '#f7f7f7', /* Cinza Claro */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Configuração de Fonte Inter e estilos base */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap');
-        
-        :root {
-            --primary-color: #0b2d4b; /* Azul Escuro */
-            --secondary-color: #1f5787; /* Azul Médio */
-            --background-color: #f7f7f7; /* Cinza Claro */
-            --text-color: #333333;
-            --card-color: #ffffff; /* Branco */
+        /* Estilos Base e Comportamento de Rolagem Suave */
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: #f7f7f7; /* Cor de fundo */
+            color: #333333;
             line-height: 1.6;
         }
 
+        /* Estilo para Títulos de Seção (Underline personalizado) */
         .section-title {
             position: relative;
             display: inline-block;
@@ -45,11 +59,11 @@
             left: 0;
             width: 50%;
             height: 4px;
-            background-color: var(--primary-color);
-            border-radius: 9999px; /* rounded-full */
+            background-color: #0b2d4b; /* Cor primária */
+            border-radius: 9999px;
         }
 
-        /* Estilo específico para a galeria do portfólio */
+        /* Estilo específico para a galeria do portfólio (mantido para a transição e sombra) */
         .portfolio-item {
             display: flex;
             flex-direction: column;
@@ -68,8 +82,8 @@
 
         .portfolio-item img {
             width: 100%;
-            height: 250px; /* Altura fixa para consistência */
-            object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+            height: 250px; 
+            object-fit: cover; 
         }
 
         .item-content {
@@ -81,7 +95,7 @@
             font-size: 1.25rem; /* text-xl */
             font-weight: 600; /* font-semibold */
             margin-bottom: 0.5rem;
-            color: var(--primary-color);
+            color: #0b2d4b; /* Cor primária */
         }
 
         .tag-pill {
@@ -93,20 +107,7 @@
             font-size: 0.875rem;
             font-weight: 500;
             background-color: #e0e7ff; /* light-blue */
-            color: var(--primary-color);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
+            color: #0b2d4b; /* Cor primária */
         }
 
         /* Responsividade para a grade do portfólio */
@@ -128,19 +129,30 @@
     <!-- Cabeçalho Fixo -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-800 hover:text-gray-900 transition duration-300">
+            <a href="#" class="text-2xl font-bold text-gray-800 hover:text-primary transition duration-300">
                 Rudhere Santana
             </a>
+            
+            <!-- Menu Desktop -->
             <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="text-gray-600 hover:text-gray-900 font-medium transition duration-300">Sobre Mim</a>
-                <a href="#portfolio" class="text-gray-600 hover:text-gray-900 font-medium transition duration-300">Portfólio</a>
-                <a href="#contact" class="text-gray-600 hover:text-gray-900 font-medium transition duration-300">Contato</a>
+                <a href="#about" class="text-gray-600 hover:text-primary font-medium transition duration-300">Sobre Mim</a>
+                <a href="#portfolio" class="text-gray-600 hover:text-primary font-medium transition duration-300">Portfólio</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary font-medium transition duration-300">Contato</a>
             </nav>
             
-            <!-- Botão do Menu Mobile (A ser implementado com JS se necessário, mas oculto por enquanto) -->
-            <button class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
+            <!-- Botão do Menu Mobile -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-primary focus:outline-none p-2">
                 <i class="fas fa-bars text-xl"></i>
             </button>
+        </div>
+        
+        <!-- Menu Mobile (Oculto por padrão) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg pb-4">
+            <nav class="px-4 space-y-2">
+                <a href="#about" class="block text-gray-700 hover:bg-gray-100 p-2 rounded-lg font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Sobre Mim</a>
+                <a href="#portfolio" class="block text-gray-700 hover:bg-gray-100 p-2 rounded-lg font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Portfólio</a>
+                <a href="#contact" class="block text-gray-700 hover:bg-gray-100 p-2 rounded-lg font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contato</a>
+            </nav>
         </div>
     </header>
 
@@ -151,27 +163,28 @@
                 <!-- Texto de Apresentação -->
                 <div class="md:w-1/2">
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-                        Suporte Técnico e Criação que <span class="text-primary-color">Transformam</span>
+                        Suporte Técnico e Criação que <span class="text-primary">Transformam</span>
                     </h1>
                     <p class="text-lg text-gray-600 mb-8">
                         Profissional de Suporte Técnico com foco em infraestrutura, automação com n8n e Python, e soluções de Marketing Digital. Transformando problemas complexos em processos otimizados.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#portfolio" class="btn-primary flex items-center">
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#portfolio" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-secondary transition duration-300 flex items-center justify-center shadow-lg">
                             Ver Portfólio <i class="fas fa-arrow-right ml-2"></i>
                         </a>
-                        <!-- Link para o currículo com o novo nome do arquivo -->
-                        <a href="Rudhere_Santana.pdf" target="_blank" class="text-primary-color border border-primary-color px-4 py-3 rounded-lg font-semibold hover:bg-primary-color hover:text-white transition duration-300 flex items-center">
+                        <!-- Link para o currículo -->
+                        <a href="Rudhere_Santana.pdf" target="_blank" class="text-primary border border-primary px-6 py-3 rounded-xl font-semibold hover:bg-primary hover:text-white transition duration-300 flex items-center justify-center">
                             <i class="fas fa-download mr-2"></i> Currículo (PDF)
                         </a>
                     </div>
                 </div>
                 
-                <!-- Imagem/Ilustração (opcional, pode ser substituída por uma imagem sua) -->
+                <!-- Imagem/Ilustração -->
                 <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
                     <img src="https://placehold.co/400x400/1f5787/ffffff?text=Rudhere+Santana" 
-                         alt="Ilustração de um profissional de TI trabalhando" 
-                         class="rounded-full shadow-xl w-64 h-64 sm:w-80 sm:h-80 object-cover border-4 border-primary-color"
+                        alt="Ilustração de um profissional de TI trabalhando" 
+                        class="rounded-full shadow-xl w-64 h-64 sm:w-80 sm:h-80 object-cover border-4 border-primary"
+                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/1f5787/ffffff?text=Rudhere+Santana';"
                     >
                 </div>
             </div>
@@ -189,15 +202,15 @@
                             Com experiência sólida em Suporte Técnico e Gerenciamento de Incidentes (seguindo práticas ITIL), minha trajetória profissional se concentra em garantir a eficiência operacional e a satisfação do usuário. Tenho um conhecimento aprofundado em infraestrutura de TI, cobrindo Windows, Linux, redes (TCP/IP, DHCP, DNS) e manutenção de hardware.
                         </p>
                         <p>
-                            Minha paixão por otimização me levou à automação de processos, utilizando ferramentas Low-code como <strong class="text-secondary-color">n8n</strong> e scripts em <strong class="text-secondary-color">Python</strong> para integração via APIs, focando na otimização de rotinas e na criação de soluções inovadoras.
+                            Minha paixão por otimização me levou à automação de processos, utilizando ferramentas Low-code como <strong class="text-secondary">n8n</strong> e scripts em <strong class="text-secondary">Python</strong> para integração via APIs, focando na otimização de rotinas e na criação de soluções inovadoras.
                         </p>
                         <p>
-                            Além da TI, possuo habilidades complementares em <strong class="text-secondary-color">Marketing Digital</strong> e <strong class="text-secondary-color">Copywriting</strong>, o que me permite criar conteúdos e campanhas eficazes, unindo a visão técnica com a estratégica. Meu objetivo é sempre aplicar tecnologia para resolver problemas de forma criativa e prática.
+                            Além da TI, possuo habilidades complementares em <strong class="text-secondary">Marketing Digital</strong> e <strong class="text-secondary">Copywriting</strong>, o que me permite criar conteúdos e campanhas eficazes, unindo a visão técnica com a estratégica. Meu objetivo é sempre aplicar tecnologia para resolver problemas de forma criativa e prática.
                         </p>
                     </div>
                     
-                    <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-semibold mb-4 text-primary-color">Minhas Habilidades Chave</h3>
+                    <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg h-fit">
+                        <h3 class="text-xl font-semibold mb-4 text-primary">Minhas Habilidades Chave</h3>
                         <div class="flex flex-wrap gap-2">
                             <span class="tag-pill">Suporte e Infraestrutura (ITIL)</span>
                             <span class="tag-pill">Automação (n8n & APIs)</span>
@@ -223,7 +236,6 @@
                     
                     <!-- Item 1: Projeto Coffee Shop (Design Web) -->
                     <div class="portfolio-item bg-white">
-                        <!-- Caminho corrigido para usar a extensão .jpg -->
                         <img src="Escape to Our Cozy Coffee Shop_ Indulge in….jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Design+Web+Coffee+Shop'" alt="Mockup de um site de cafeteria">
                         <div class="item-content">
                             <h3 class="item-title">Design Web: Coffee Shop</h3>
@@ -236,9 +248,8 @@
                         </div>
                     </div>
 
-                    <!-- Item 2: Imagem Design Sobrancelhas (Antes/Depois) -->
+                    <!-- Item 2: Imagem Design Sobrancelhas (Antes/Depois) - Usando Sem título-4.jpg -->
                     <div class="portfolio-item bg-white">
-                        <!-- Caminho corrigido para usar a extensão .jpg -->
                         <img src="Sem título-4.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Design+Sobrancelhas+4'" alt="Imagem de antes e depois de design de sobrancelhas">
                         <div class="item-content">
                             <h3 class="item-title">Design Gráfico: Sobrancelhas (Antes/Depois)</h3>
@@ -251,10 +262,9 @@
                         </div>
                     </div>
                     
-                    <!-- Item 3: Imagem Logo Silune -->
+                    <!-- Item 3: Imagem Logo Silune - Usando Sem título-1.jpg -->
                     <div class="portfolio-item bg-white">
-                        <!-- ATUALIZADO: Usando a extensão .png, que parece ser a correta no repositório. -->
-                        <img src="Sem título-1.png" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Logo+Silune'" alt="Design da logo Silune">
+                        <img src="Sem título-1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Logo+Silune'" alt="Design da logo Silune">
                         <div class="item-content">
                             <h3 class="item-title">Design de Logo: Silune</h3>
                             <p class="text-gray-600 mb-4">Criação de identidade visual (logotipo) com tema de lua crescente em cor de ouro rosado.</p>
@@ -266,10 +276,9 @@
                         </div>
                     </div>
 
-                    <!-- Item 4: Imagem Lista de Preços Samambaia -->
+                    <!-- Item 4: Imagem Lista de Preços Samambaia - Usando Sem título-7.jpg -->
                     <div class="portfolio-item bg-white">
-                        <!-- ATUALIZADO: Usando a extensão .png, que parece ser a correta no repositório. -->
-                        <img src="Sem título-7.png" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Lista+Preços+Samambaia'" alt="Lista de preços de serviços de beleza em Samambaia">
+                        <img src="Sem título-7.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Lista+Preços+Samambaia'" alt="Lista de preços de serviços de beleza em Samambaia">
                         <div class="item-content">
                             <h3 class="item-title">Arte de Mídia Social: Lista de Preços (Samambaia)</h3>
                             <p class="text-gray-600 mb-4">Criação de um informativo de preços para serviços de design de sobrancelhas, adaptado para mídias sociais.</p>
@@ -281,10 +290,9 @@
                         </div>
                     </div>
 
-                    <!-- Item 5: Imagem Lista de Preços Guará -->
+                    <!-- Item 5: Imagem Lista de Preços Guará - Usando Sem título-6.jpg -->
                     <div class="portfolio-item bg-white">
-                        <!-- ATUALIZADO: Usando a extensão .png, que parece ser a correta no repositório. -->
-                        <img src="Sem título-6.png" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Lista+Preços+Guará'" alt="Lista de preços de serviços de beleza no Guará">
+                        <img src="Sem título-6.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Lista+Preços+Guará'" alt="Lista de preços de serviços de beleza no Guará">
                         <div class="item-content">
                             <h3 class="item-title">Arte de Mídia Social: Lista de Preços (Guará)</h3>
                             <p class="text-gray-600 mb-4">Variação do informativo de preços para a unidade do Guará, mantendo a identidade visual.</p>
@@ -296,10 +304,9 @@
                         </div>
                     </div>
                     
-                    <!-- Item 6: Imagem Design Sobrancelhas (Rosto) -->
+                    <!-- Item 6: Imagem Design Sobrancelhas (Rosto) - Usando Sem título-2.jpg -->
                     <div class="portfolio-item bg-white">
-                        <!-- ATUALIZADO: Usando a extensão .png, que parece ser a correta no repositório. -->
-                        <img src="Sem título-2.png" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Design+Sobrancelhas+2'" alt="Close-up de rosto com sobrancelha em destaque">
+                        <img src="Sem título-2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x250/f0f0f0/333333?text=Design+Sobrancelhas+2'" alt="Close-up de rosto com sobrancelha em destaque">
                         <div class="item-content">
                             <h3 class="item-title">Design Gráfico: Destaque Facial</h3>
                             <p class="text-gray-600 mb-4">Imagem promocional com destaque para o design de sobrancelhas e a logo da marca.</p>
@@ -315,7 +322,7 @@
         </section>
 
         <!-- Seção de Contato -->
-        <section id="contact" class="py-16 sm:py-20 lg:py-24 bg-primary-color text-white">
+        <section id="contact" class="py-16 sm:py-20 lg:py-24 bg-primary text-white">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-3xl sm:text-4xl font-bold mb-4">Vamos Trabalhar Juntos?</h2>
                 <p class="text-lg mb-8 opacity-90">
@@ -324,15 +331,15 @@
                 
                 <div class="flex justify-center space-x-6">
                     <!-- WhatsApp -->
-                    <a href="https://wa.me/5561993159695" target="_blank" class="text-2xl hover:text-green-400 transition duration-300">
+                    <a href="https://wa.me/5561993159695" target="_blank" class="text-3xl hover:text-green-400 transition duration-300 p-2">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                     <!-- Email -->
-                    <a href="mailto:rudhere@gmail.com" class="text-2xl hover:text-red-400 transition duration-300">
+                    <a href="mailto:rudhere@gmail.com" class="text-3xl hover:text-red-400 transition duration-300 p-2">
                         <i class="fas fa-envelope"></i>
                     </a>
                     <!-- LinkedIn -->
-                    <a href="https://linkedin.com/in/rudhere" target="_blank" class="text-2xl hover:text-blue-400 transition duration-300">
+                    <a href="https://linkedin.com/in/rudhere" target="_blank" class="text-3xl hover:text-blue-400 transition duration-300 p-2">
                         <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
@@ -345,10 +352,29 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
             <p>&copy; 2025 Rudhere Santana. Todos os direitos reservados.</p>
             <p class="mt-2">
-                Desenvolvido com <i class="fas fa-code text-secondary-color"></i> e <i class="fas fa-heart text-red-500"></i>.
+                Desenvolvido com <i class="fas fa-code text-secondary"></i> e <i class="fas fa-heart text-red-500"></i>.
             </p>
         </div>
     </footer>
+
+    <script>
+        // Lógica do Menu Mobile
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            // Altera o ícone do botão
+            const icon = menuButton.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+    </script>
 
 </body>
 </html>
