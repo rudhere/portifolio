@@ -1,404 +1,236 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <!-- Configuração de viewport corrigida para total responsividade -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio de Rudhere Santana</title>
+    <title>Rudhere - Portfólio Profissional</title>
     <!-- Carregamento do Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Carregamento do Font Awesome para ícones -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Remixicon para ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" rel="stylesheet">
     
-    <!-- Configuração Customizada do Tailwind: Adiciona as cores primárias e a fonte Inter -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary': '#0b2d4b',    /* Azul Escuro */
-                        'secondary': '#1f5787',  /* Azul Médio */
-                        'background-light': '#f7f7f7', /* Cinza Claro */
-                        'card-color': '#ffffff', /* Branco */
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-
     <style>
-        /* Estilos Base e Comportamento de Rolagem Suave */
-        html {
-            scroll-behavior: smooth;
+        /* Manter as definições de fontes para respeitar a intenção original, 
+           mas usar classes Tailwind com fallback para fontes do sistema (Inter) */
+        @font-face {
+            font-family: 'MiSans-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'MiSans-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Alibaba-PuHuiTi-Regular';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/Alibaba-PuHuiTi-Regular.otf');
+        }
+        @font-face {
+            font-family: 'Alibaba-PuHuiTi-Bold';
+            src: url('https://assets-persist.lovart.ai/agent-static-assets/Alibaba-PuHuiTi-Bold.otf');
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7f7f7; /* Cor de fundo */
-            color: #333333;
-            line-height: 1.6;
+        /* Configurações de fontes customizadas para uso nas classes Tailwind */
+        .font-sans-custom { font-family: 'MiSans-Regular', 'Inter', sans-serif; }
+        .font-bold-custom { font-family: 'MiSans-Bold', 'Inter', sans-serif; }
+        .font-brand { font-family: 'Alibaba-PuHuiTi-Bold', 'Inter', sans-serif; }
+        .font-brand-regular { font-family: 'Alibaba-PuHuiTi-Regular', 'Inter', sans-serif; }
+
+        /* Keyframes e classe para a animação do anel de perfil */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* Estilo para Títulos de Seção (Underline personalizado) */
-        .section-title {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 3rem;
+        .profile-decoration-ring {
+            animation: rotate 60s linear infinite;
         }
 
-        .section-title h2 {
-            font-size: 2.25rem; /* text-4xl */
-            font-weight: 700; /* font-bold */
-        }
-
-        .section-title::after {
+        /* Animação de sublinhado customizada para links de navegação */
+        .nav-link-underline::after {
             content: '';
             position: absolute;
-            bottom: -0.5rem;
+            bottom: -5px;
             left: 0;
-            width: 50%;
-            height: 4px;
-            background-color: #0b2d4b; /* Cor primária */
-            border-radius: 9999px;
+            width: 0;
+            height: 2px;
+            background-color: #0058D9;
+            transition: width 0.3s;
         }
 
-        /* Estilo para cada item de portfólio */
-        .portfolio-item {
-            display: flex;
-            flex-direction: column;
-            background-color: var(--card-color);
-            border-radius: 0.75rem; /* rounded-xl */
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            height: 100%;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-        }
-
-        .portfolio-item img {
+        .nav-link-underline:hover::after {
             width: 100%;
-            height: 250px; /* Altura fixa para consistência visual */
-            object-fit: cover; /* Garante que a imagem cubra a área sem distorção */
-            /* Adiciona um efeito sutil de overlay no hover para indicar interatividade */
-            transition: opacity 0.3s ease;
-        }
-        
-        .portfolio-item:hover img {
-            opacity: 0.9;
-        }
-
-        .item-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .item-title {
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 600; /* font-semibold */
-            margin-bottom: 0.5rem;
-            color: #0b2d4b; /* Cor primária */
-        }
-
-        .tag-pill {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            background-color: #e0e7ff; /* light-blue */
-            color: #0b2d4b; /* Cor primária */
-        }
-
-        /* Responsividade para a grade do portfólio */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-        @media (min-width: 640px) { /* sm */
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 1024px) { /* lg */
-            .portfolio-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
         }
     </style>
 </head>
+<body class="bg-[#F8FAFC] text-[#001F3F] font-sans-custom min-h-screen">
 
-<body class="bg-gray-50">
-
-    <!-- Cabeçalho Fixo -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-800 hover:text-primary transition duration-300">
-                Rudhere Santana
-            </a>
-            
-            <!-- Menu Desktop -->
-            <nav class="hidden md:flex space-x-8">
-                <a href="#about" class="text-gray-600 hover:text-primary font-medium transition duration-300">Sobre Mim</a>
-                <a href="#portfolio" class="text-gray-600 hover:text-primary font-medium transition duration-300">Portfólio</a>
-                <a href="#contact" class="text-gray-600 hover:text-primary font-medium transition duration-300">Contato</a>
-            </nav>
-            
-            <!-- Botão do Menu Mobile -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-primary focus:outline-none p-2">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
-        </div>
-        
-        <!-- Menu Mobile (Oculto por padrão) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg pb-4">
-            <nav class="px-4 space-y-2">
-                <a href="#about" class="block text-gray-700 hover:bg-gray-100 p-2 rounded-lg font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Sobre Mim</a>
-                <a href="#portfolio" class="block text-gray-700 hover:bg-gray-100 p-2 rounded-lg font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Portfólio</a>
-                <a href="#contact" class="block text-gray-700 hover:bg-gray-100 p-2 rounded-lg font-medium" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contato</a>
-            </nav>
+    <!-- Header - Navegação Fixa e Responsiva -->
+    <header class="fixed top-0 left-0 w-full h-24 flex items-center justify-between px-4 sm:px-8 lg:px-16 xl:px-40 bg-white bg-opacity-90 backdrop-blur-sm shadow-lg z-50">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center space-x-4">
+            <div class="w-12 h-12 rounded-full bg-[#0058D9] flex items-center justify-center text-white font-brand text-xl border-2 border-[#0058D9]">R</div>
+            <span class="font-brand text-2xl sm:text-3xl tracking-wider text-[#001F3F]">RUDHERE</span>
+        </a>
+        <!-- Links de Navegação (Escondido em telas pequenas) -->
+        <nav class="hidden md:block">
+            <ul class="flex space-x-10 lg:space-x-16">
+                <li><a href="#sobre-mim" class="nav-link-underline font-bold-custom text-lg relative hover:text-[#0058D9] transition duration-300">Sobre Mim</a></li>
+                <li><a href="#contato" class="nav-link-underline font-bold-custom text-lg relative hover:text-[#0058D9] transition duration-300">Contato</a></li>
+            </ul>
+        </nav>
+        <!-- Ícone de Menu para Mobile (Opcional para implementação futura) -->
+        <div class="md:hidden">
+            <i class="ri-menu-line text-2xl cursor-pointer text-[#001F3F]"></i>
         </div>
     </header>
 
-    <main>
-        <!-- Seção Hero/Introdução -->
-        <section id="hero" class="bg-white py-20 sm:py-24 lg:py-32">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
-                <!-- Texto de Apresentação -->
-                <div class="md:w-1/2">
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-                        Suporte Técnico e Criação que <span class="text-primary">Transformam</span>
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 lg:pb-24 min-h-screen flex items-center relative overflow-hidden" id="home">
+        <!-- Forma Decorativa de Fundo -->
+        <div class="absolute left-[-50px] top-[100px] sm:top-[200px] w-80 h-80 sm:w-[500px] sm:h-[500px] bg-gradient-to-br from-blue-600/10 to-blue-900/10 rounded-full filter blur-3xl sm:blur-xl z-0"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-7xl">
+            <!-- Layout: Grid de 1 coluna em mobile, 7 colunas (4/3) em desktop -->
+            <div class="grid grid-cols-1 lg:grid-cols-7 gap-12 lg:gap-20 items-center">
+                <!-- Conteúdo de Texto (4 colunas em telas grandes) -->
+                <div class="hero-text lg:col-span-4 z-10">
+                    <h1 class="text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6rem] font-bold-custom leading-tight mb-6 lg:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#001F3F] to-[#0058D9]">
+                        Especialista em Automação Digital e Design
                     </h1>
-                    <p class="text-lg text-gray-600 mb-8">
-                        Profissional de Suporte Técnico com foco em infraestrutura, automação com n8n e Python, e soluções de Marketing Digital. Transformando problemas complexos em processos otimizados.
+                    <h2 class="font-brand-regular text-2xl md:text-3xl text-slate-500 mb-10 lg:mb-16 font-normal">
+                        Transformando Processos e Experiências
+                    </h2>
+                    
+                    <!-- Grupo de CTAs (Flex vertical em mobile, horizontal em desktop) -->
+                    <div class="cta-group flex flex-col sm:flex-row gap-4 sm:gap-6">
+                        <button class="bg-[#0058D9] text-white px-8 py-4 text-lg font-bold-custom rounded-full transition duration-300 flex items-center justify-center shadow-xl shadow-blue-500/30 hover:bg-[#0046b0] hover:translate-y-[-2px] border-2 border-[#0058D9]">
+                            <i class="ri-calendar-check-fill mr-2"></i>
+                            Agende uma Consulta
+                        </button>
+                        <button class="bg-transparent text-[#001F3F] border-2 border-[#001F3F] px-8 py-4 text-lg font-bold-custom rounded-full transition duration-300 flex items-center justify-center hover:bg-[#001F3F] hover:text-white hover:translate-y-[-2px]">
+                            <i class="ri-gallery-view-2 mr-2"></i>
+                            Ver Projetos
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Imagem de Perfil (3 colunas em telas grandes) -->
+                <div class="hero-image-wrapper lg:col-span-3 flex flex-col items-center justify-center z-10 mx-auto w-full max-w-sm md:max-w-md lg:max-w-none">
+                    <div class="relative w-72 h-72 md:w-96 md:h-96">
+                        <!-- Anel de Decoração Animado -->
+                        <div class="profile-decoration-ring absolute w-[105%] h-[105%] border-2 border-dashed border-[#0058D9] rounded-full opacity-30 top-[-2.5%] left-[-2.5%]"></div>
+                        <!-- Container da Imagem -->
+                        <div class="profile-img-container w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl shadow-gray-400/20 relative z-20">
+                            <!-- Conteúdo de Placeholder (pode ser substituído por uma imagem URL) -->
+                            <div class="profile-img w-full h-full flex items-center justify-center bg-slate-200 text-slate-600 font-bold-custom text-2xl md:text-4xl object-cover object-center">
+                                [Imagem de Perfil]
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tag de Nome -->
+                    <div class="hero-name-tag mt-8 text-center">
+                        <div class="font-brand text-4xl md:text-5xl text-[#001F3F]">Rudhere</div>
+                        <div class="text-lg md:text-xl text-slate-500 tracking-widest uppercase mt-1 font-brand-regular">Digital Innovator</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="bg-white py-20 lg:py-32" id="sobre-mim">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-7xl">
+            <!-- Layout: Grid de 1 coluna em mobile, 2 colunas em desktop -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+                <!-- Sobre Mim - Texto -->
+                <div class="about-content">
+                    <h2 class="section-title font-bold-custom text-4xl md:text-5xl text-[#001F3F] mb-10 relative pb-4 inline-block">
+                        Sobre Mim
+                        <span class="absolute left-0 bottom-0 w-16 h-1 bg-[#0058D9] rounded-full"></span>
+                    </h2>
+                    <p class="font-brand-regular text-lg md:text-xl leading-relaxed text-slate-700 text-justify space-y-4">
+                        Sou um profissional apaixonado por unir <strong class="text-[#0058D9] font-bold">tecnologia</strong> e <strong class="text-[#0058D9] font-bold">estética</strong>. Com anos de experiência no mercado digital, dedico-me a simplificar o complexo através de soluções inteligentes de <strong class="text-[#0058D9] font-bold">automação</strong> e interfaces de usuário intuitivas.
+                        <br><br>
+                        Meu objetivo é ajudar empresas e indivíduos a otimizar seus fluxos de trabalho e criar presenças digitais impactantes. Acredito que o bom design não é apenas sobre como algo parece, mas principalmente sobre como funciona. Combino análise de dados rigorosa com criatividade fluida para entregar resultados que transformam negócios.
                     </p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="#portfolio" class="bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-secondary transition duration-300 flex items-center justify-center shadow-lg">
-                            Ver Portfólio <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                        <!-- Link para o currículo -->
-                        <a href="Rudhere_Santana.pdf" target="_blank" class="text-primary border border-primary px-6 py-3 rounded-xl font-semibold hover:bg-primary hover:text-white transition duration-300 flex items-center justify-center">
-                            <i class="fas fa-download mr-2"></i> Currículo (PDF)
-                        </a>
-                    </div>
                 </div>
-                
-                <!-- Imagem/Ilustração -->
-                <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
-                    <!-- Uso de Sem título-2.png para uma imagem de rosto mais profissional, se disponível -->
-                    <img src="Sem título-2.png" 
-                        alt="Foto de Perfil de Rudhere Santana" 
-                        class="rounded-full shadow-xl w-64 h-64 sm:w-80 sm:h-80 object-cover border-4 border-primary"
-                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/1f5787/ffffff?text=Rudhere+Santana';"
-                    >
-                </div>
-            </div>
-        </section>
 
-        <!-- Seção Sobre Mim -->
-        <section id="about" class="py-16 sm:py-20 lg:py-24 bg-gray-100">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="section-title mx-auto md:mx-0">
-                    <h2>Sobre Mim</h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2 text-lg text-gray-700 space-y-4">
-                        <p>
-                            Com experiência sólida em Suporte Técnico e Gerenciamento de Incidentes (seguindo práticas ITIL), minha trajetória profissional se concentra em garantir a eficiência operacional e a satisfação do usuário. Tenho um conhecimento aprofundado em infraestrutura de TI, cobrindo Windows, Linux, redes (TCP/IP, DHCP, DNS) e manutenção de hardware.
-                        </p>
-                        <p>
-                            Minha paixão por otimização me levou à automação de processos, utilizando ferramentas Low-code como <strong class="text-secondary">n8n</strong> e scripts em <strong class="text-secondary">Python</strong> para integração via APIs, focando na otimização de rotinas e na criação de soluções inovadoras.
-                        </p>
-                        <p>
-                            Além da TI, possuo habilidades complementares em <strong class="text-secondary">Marketing Digital</strong> e <strong class="text-secondary">Copywriting</strong>, o que me permite criar conteúdos e campanhas eficazes, unindo a visão técnica com a estratégica. Meu objetivo é sempre aplicar tecnologia para resolver problemas de forma criativa e prática.
-                        </p>
-                    </div>
-                    
-                    <!-- Coluna de Skills/Competências -->
-                    <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg">
-                        <h3 class="text-xl font-bold text-primary mb-4 border-b pb-2">Competências Chave</h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li><i class="fas fa-check-circle text-secondary mr-2"></i> Infraestrutura (Windows/Linux/Redes)</li>
-                            <li><i class="fas fa-check-circle text-secondary mr-2"></i> Automação Low-Code (n8n, APIs)</li>
-                            <li><i class="fas fa-check-circle text-secondary mr-2"></i> Suporte Técnico e ITIL</li>
-                            <li><i class="fas fa-check-circle text-secondary mr-2"></i> Python (Básico) e HTML/CSS</li>
-                            <li><i class="fas fa-check-circle text-secondary mr-2"></i> Marketing Digital e Copywriting</li>
-                            <li><i class="fas fa-check-circle text-secondary mr-2"></i> UX Design (Conceitos Básicos)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção Portfólio -->
-        <section id="portfolio" class="py-16 sm:py-20 lg:py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="section-title mx-auto md:mx-0">
-                    <h2>Portfólio</h2>
-                </div>
-                
-                <p class="text-lg text-gray-600 mb-10 text-center md:text-left">
-                    Uma amostra de projetos que combinam suporte técnico, automação e design digital.
-                </p>
-
-                <!-- Grid do Portfólio (Corrigido para usar PNGs) -->
-                <div class="portfolio-grid">
-
-                    <!-- Item 1: Design Web Coffee Shop -->
-                    <div class="portfolio-item">
-                        <!-- Caminho Corrigido: Escape to Our Cozy Coffee Shop_ Indulge in….jpg -->
-                        <img src="Escape to Our Cozy Coffee Shop_ Indulge in….jpg" alt="Layout de Website para Coffee Shop" 
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x250/1f5787/ffffff?text=Design+Web+Coffee+Shop';">
-                        <div class="item-content bg-white">
-                            <h3 class="item-title">Wireframe/Design de UI/UX (Coffee Shop)</h3>
-                            <p class="text-gray-600 mb-4">Demonstração de competências em layout, hierarquia visual e princípios de User Interface (UI) e User Experience (UX).</p>
-                            <div>
-                                <span class="tag-pill">UX/UI Design</span>
-                                <span class="tag-pill">Web Design</span>
+                <!-- Competências Chave -->
+                <div class="skills-container">
+                    <h3 class="font-bold-custom text-3xl md:text-4xl text-[#001F3F] mb-8">Competências Chave</h3>
+                    <div class="skills-list space-y-6">
+                        <!-- Skill Item 1 -->
+                        <div class="flex items-center bg-[#F8FAFC] p-4 md:p-6 rounded-xl border-l-4 border-[#0058D9] transition duration-300 hover:transform hover:translate-x-2 hover:shadow-xl hover:shadow-gray-200/50 hover:bg-white">
+                            <div class="w-14 h-14 bg-[#0058D9]/10 rounded-lg flex items-center justify-center mr-6">
+                                <i class="ri-robot-2-line text-3xl text-[#0058D9]"></i>
                             </div>
+                            <span class="font-bold-custom text-xl text-slate-800">Automação de Processos</span>
                         </div>
-                    </div>
-
-                    <!-- Item 2: Campanha Silune - Transformação (Sem título-4.png) -->
-                    <div class="portfolio-item">
-                        <!-- Caminho Corrigido: Sem título-4.png -->
-                        <img src="Sem título-4.png" alt="Design Gráfico Sobrancelhas Antes e Depois" 
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x250/1f5787/ffffff?text=Campanha+Transformacao';">
-                        <div class="item-content bg-white">
-                            <h3 class="item-title">Campanha Silune - Transformação</h3>
-                            <p class="text-gray-600 mb-4">Design gráfico para redes sociais focado em transformação e call-to-action. Uso de contraste para realçar o benefício do serviço.</p>
-                            <div>
-                                <span class="tag-pill">Design Gráfico</span>
-                                <span class="tag-pill">Marketing</span>
+                        <!-- Skill Item 2 -->
+                        <div class="flex items-center bg-[#F8FAFC] p-4 md:p-6 rounded-xl border-l-4 border-[#0058D9] transition duration-300 hover:transform hover:translate-x-2 hover:shadow-xl hover:shadow-gray-200/50 hover:bg-white">
+                            <div class="w-14 h-14 bg-[#0058D9]/10 rounded-lg flex items-center justify-center mr-6">
+                                <i class="ri-layout-masonry-line text-3xl text-[#0058D9]"></i>
                             </div>
+                            <span class="font-bold-custom text-xl text-slate-800">Design UI/UX</span>
                         </div>
-                    </div>
-
-                    <!-- Item 3: Cardápio Samambaia (Sem título-7.png) -->
-                    <div class="portfolio-item">
-                        <!-- Caminho Corrigido: Sem título-7.png -->
-                        <img src="Sem título-7.png" alt="Cardápio de Serviços de Sobrancelhas - Samambaia" 
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x250/1f5787/ffffff?text=Cardapio+Samambaia';">
-                        <div class="item-content bg-white">
-                            <h3 class="item-title">Campanha Silune - Preços (Samambaia)</h3>
-                            <p class="text-gray-600 mb-4">Criação de cardápio de serviços com preços segmentados por localização. Foco na clareza da informação e estética da marca.</p>
-                            <div>
-                                <span class="tag-pill">Design Editorial</span>
-                                <span class="tag-pill">Conteúdo Segmentado</span>
+                        <!-- Skill Item 3 -->
+                        <div class="flex items-center bg-[#F8FAFC] p-4 md:p-6 rounded-xl border-l-4 border-[#0058D9] transition duration-300 hover:transform hover:translate-x-2 hover:shadow-xl hover:shadow-gray-200/50 hover:bg-white">
+                            <div class="w-14 h-14 bg-[#0058D9]/10 rounded-lg flex items-center justify-center mr-6">
+                                <i class="ri-code-s-slash-line text-3xl text-[#0058D9]"></i>
                             </div>
+                            <span class="font-bold-custom text-xl text-slate-800">Programação Web</span>
                         </div>
-                    </div>
-                    
-                    <!-- Item 4: Logo Silune (Sem título-1.png) -->
-                    <div class="portfolio-item">
-                        <!-- Caminho Corrigido: Sem título-1.png (Usando o JPG de Sem título-1) -->
-                        <img src="Sem título-1.jpg" alt="Logo Silune" 
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x250/1f5787/ffffff?text=Cricao+de+Marca';">
-                        <div class="item-content bg-white">
-                            <h3 class="item-title">Criação de Marca (Silune)</h3>
-                            <p class="text-gray-600 mb-4">Exemplo de trabalho de identidade visual, tipografia e tratamento de logo com efeito metálico (rose gold) para apelo premium.</p>
-                            <div>
-                                <span class="tag-pill">Identidade Visual</span>
-                                <span class="tag-pill">Branding</span>
+                        <!-- Skill Item 4 -->
+                        <div class="flex items-center bg-[#F8FAFC] p-4 md:p-6 rounded-xl border-l-4 border-[#0058D9] transition duration-300 hover:transform hover:translate-x-2 hover:shadow-xl hover:shadow-gray-200/50 hover:bg-white">
+                            <div class="w-14 h-14 bg-[#0058D9]/10 rounded-lg flex items-center justify-center mr-6">
+                                <i class="ri-bar-chart-grouped-line text-3xl text-[#0058D9]"></i>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 5: Campanha Silune - Copywriting Visual (Sem título-5.png) -->
-                    <div class="portfolio-item">
-                        <!-- Caminho Corrigido: Sem título-5.png -->
-                        <img src="Sem título-5.png" alt="Design de Sobrancelhas com texto central 'Realce a beleza do seu olhar'" 
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x250/1f5787/ffffff?text=Copywriting+Visual';">
-                        <div class="item-content bg-white">
-                            <h3 class="item-title">Campanha Silune - Copywriting Visual</h3>
-                            <p class="text-gray-600 mb-4">Post focado em Copywriting e impacto visual. A tipografia e o logo metálico reforçam a qualidade e o apelo da marca.</p>
-                            <div>
-                                <span class="tag-pill">Copywriting</span>
-                                <span class="tag-pill">Branding</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Item 6: Cardápio Guará (Sem título-6.png) -->
-                    <div class="portfolio-item">
-                        <!-- Caminho Corrigido: Sem título-6.png -->
-                        <img src="Sem título-6.png" alt="Cardápio de Serviços de Sobrancelhas - Guará" 
-                            onerror="this.onerror=null;this.src='https://placehold.co/400x250/1f5787/ffffff?text=Cardapio+Guara';">
-                        <div class="item-content bg-white">
-                            <h3 class="item-title">Campanha Silune - Preços (Guará)</h3>
-                            <p class="text-gray-600 mb-4">Variação do cardápio de serviços ajustado para a tabela de preços da unidade Guará, demonstrando flexibilidade na produção.</p>
-                            <div>
-                                <span class="tag-pill">Design Adaptativo</span>
-                                <span class="tag-pill">Gestão de Conteúdo</span>
-                            </div>
+                            <span class="font-bold-custom text-xl text-slate-800">Análise de Dados</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção Contato -->
-        <section id="contact" class="py-16 sm:py-20 lg:py-24 bg-primary text-white">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-4xl font-bold mb-4">Vamos Trabalhar Juntos?</h2>
-                <p class="text-xl mb-10 opacity-90">Estou disponível para novos projetos e desafios. Entre em contato para otimizar seus processos ou criar sua próxima campanha.</p>
-
-                <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-12">
-                    
-                    <!-- Email -->
-                    <div class="flex items-center justify-center space-x-3">
-                        <i class="fas fa-envelope text-3xl text-secondary"></i>
-                        <div>
-                            <p class="text-sm font-light">Email</p>
-                            <a href="mailto:rudhere@gmail.com" class="text-lg font-semibold hover:underline">rudhere@gmail.com</a>
-                        </div>
-                    </div>
-
-                    <!-- Telefone/WhatsApp -->
-                    <div class="flex items-center justify-center space-x-3">
-                        <i class="fas fa-phone text-3xl text-secondary"></i>
-                        <div>
-                            <p class="text-sm font-light">WhatsApp</p>
-                            <a href="https://wa.me/5561993123717" target="_blank" class="text-lg font-semibold hover:underline">(61) 9 9312-3717</a>
-                        </div>
-                    </div>
-                    
-                    <!-- LinkedIn -->
-                    <div class="flex items-center justify-center space-x-3">
-                        <i class="fab fa-linkedin text-3xl text-secondary"></i>
-                        <div>
-                            <p class="text-sm font-light">LinkedIn</p>
-                            <a href="[Seu Link do Linkedin]" target="_blank" class="text-lg font-semibold hover:underline">/rudheresantana</a>
-                        </div>
-                    </div>
-                </div>
+    <!-- Footer - Seção de Contato -->
+    <footer class="bg-[#001F3F] text-white py-20 lg:py-32 relative overflow-hidden" id="contato">
+        <!-- Padrão de Fundo -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none" style="background-image: radial-gradient(#0058D9 1px, transparent 1px); background-size: 40px 40px;"></div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-6xl relative z-10">
+            <div class="text-center">
+                <h2 class="font-bold-custom text-4xl md:text-6xl mb-6">Vamos Trabalhar Juntos?</h2>
+                <p class="font-brand-regular text-xl md:text-2xl text-slate-400 mb-16 lg:mb-24">Pronto para transformar sua empresa e elevar seu potencial digital.</p>
             </div>
-        </section>
+            
+            <!-- Cards de Contato (Flex vertical em mobile, horizontal em desktop) -->
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-20 lg:mb-32">
+                <!-- Card 1: Email -->
+                <a href="mailto:contato@rudhere.com.br" class="bg-white/5 p-6 md:p-8 rounded-xl flex flex-col items-center border border-white/10 backdrop-blur-sm transition duration-300 hover:bg-white/10 hover:translate-y-[-5px] w-full md:w-auto min-w-[280px]">
+                    <i class="ri-mail-send-line text-4xl text-[#0058D9] mb-4"></i>
+                    <span class="font-sans-custom text-xl text-white">contato@rudhere.com.br</span>
+                </a>
+                <!-- Card 2: WhatsApp -->
+                <a href="#" class="bg-white/5 p-6 md:p-8 rounded-xl flex flex-col items-center border border-white/10 backdrop-blur-sm transition duration-300 hover:bg-white/10 hover:translate-y-[-5px] w-full md:w-auto min-w-[280px]">
+                    <i class="ri-whatsapp-line text-4xl text-[#0058D9] mb-4"></i>
+                    <span class="font-sans-custom text-xl text-white">+55 11 9999-9999</span>
+                </a>
+                <!-- Card 3: LinkedIn -->
+                <a href="https://linkedin.com/in/rudhere" target="_blank" class="bg-white/5 p-6 md:p-8 rounded-xl flex flex-col items-center border border-white/10 backdrop-blur-sm transition duration-300 hover:bg-white/10 hover:translate-y-[-5px] w-full md:w-auto min-w-[280px]">
+                    <i class="ri-linkedin-fill text-4xl text-[#0058D9] mb-4"></i>
+                    <span class="font-sans-custom text-xl text-white">linkedin.com/in/rudhere</span>
+                </a>
+            </div>
 
-    </main>
-
-    <!-- Rodapé -->
-    <footer class="bg-gray-900 text-white py-6">
-        <div class="container mx-auto px-4 text-center text-sm">
-            <p>&copy; 2025 Rudhere Santana. Todos os direitos reservados.</p>
+            <!-- Copyright -->
+            <div class="border-t border-white/10 pt-8 text-center text-sm text-slate-500 font-brand-regular">
+                © 2025 Rudhere. Todos os direitos reservados. Desenvolvido com <i class="ri-heart-fill text-red-500"></i>.
+            </div>
         </div>
     </footer>
 
-    <!-- Script para o Menu Mobile -->
-    <script>
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-    </script>
 </body>
 </html>
