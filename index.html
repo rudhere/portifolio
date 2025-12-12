@@ -66,11 +66,11 @@
 
     <!-- Header - Navegação Fixa e Responsiva -->
     <header class="fixed top-0 left-0 w-full h-24 flex items-center justify-between px-4 sm:px-8 lg:px-16 xl:px-40 bg-white bg-opacity-90 backdrop-blur-sm shadow-lg z-50">
-        <!-- Logo (Caminho Revisado para .png) -->
+        <!-- Logo -->
         <a href="#home" class="flex items-center space-x-4">
             <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-white font-brand text-xl border-2 border-[#0058D9] overflow-hidden">
-                <!-- Imagem do Logo - REVISADO (Usando .png) -->
-                <img src="https://raw.githubusercontent.com/rudhere/portifolio/main/logo%20(2).png" alt="Logomarca Rudhere" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/48x48/0058D9/FFFFFF?text=R'">
+                <!-- Imagem do Logo - Caminho Revisado -->
+                <img id="logo-img" src="https://raw.githubusercontent.com/rudhere/portifolio/main/logo%20(2).png" alt="Logomarca Rudhere" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/48x48/0058D9/FFFFFF?text=R'">
             </div>
             <span class="font-brand text-2xl sm:text-3xl tracking-wider text-[#001F3F]">RUDHERE</span>
         </a>
@@ -82,11 +82,30 @@
                 <li><a href="#contato" class="nav-link-underline font-bold-custom text-lg relative hover:text-[#0058D9] transition duration-300">Contato</a></li>
             </ul>
         </nav>
-        <!-- Ícone de Menu para Mobile (Para futura implementação de menu hambúrguer) -->
+        <!-- Ícone de Menu para Mobile (Adicionando o ID e evento para JS) -->
         <div class="md:hidden">
-            <i class="ri-menu-line text-2xl cursor-pointer text-[#001F3F]"></i>
+            <i id="mobile-menu-open" class="ri-menu-line text-3xl cursor-pointer text-[#001F3F] hover:text-[#0058D9] transition duration-300"></i>
         </div>
     </header>
+
+    <!-- Menu Mobile (Off-Canvas) -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-[#F8FAFC]/95 backdrop-blur-md z-[60] hidden flex-col items-center justify-center md:hidden transition-opacity duration-300 opacity-0">
+        <!-- Ícone de Fechar -->
+        <i id="mobile-menu-close" class="ri-close-line absolute top-6 right-6 text-4xl cursor-pointer text-[#001F3F] hover:text-[#0058D9] transition duration-300"></i>
+        
+        <nav class="text-center">
+            <ul class="space-y-10">
+                <li><a href="#sobre-mim" class="mobile-nav-link font-bold-custom text-4xl text-[#001F3F] hover:text-[#0058D9] transition duration-300">Sobre Mim</a></li>
+                <li><a href="#projetos" class="mobile-nav-link font-bold-custom text-4xl text-[#001F3F] hover:text-[#0058D9] transition duration-300">Projetos</a></li>
+                <li><a href="#contato" class="mobile-nav-link font-bold-custom text-4xl text-[#001F3F] hover:text-[#0058D9] transition duration-300">Contato</a></li>
+            </ul>
+        </nav>
+        <!-- Contato Rápido no Menu -->
+        <a href="https://wa.me/5561995829845?text=Ol%C3%A1%20Rudhere%2C%20gostaria%20de%20conversar%20sobre%20o%20seu%20portf%C3%B3lio%20e%20projetos." target="_blank" class="mt-16 bg-[#0058D9] text-white px-8 py-3 text-lg font-bold-custom rounded-full transition duration-300 flex items-center justify-center shadow-xl shadow-blue-500/30 hover:bg-[#0046b0]">
+            <i class="ri-whatsapp-line mr-2"></i>
+            WhatsApp
+        </a>
+    </div>
 
     <!-- Hero Section -->
     <section class="pt-32 pb-16 lg:pb-24 min-h-screen flex items-center relative overflow-hidden" id="home">
@@ -118,14 +137,14 @@
                     </div>
                 </div>
 
-                <!-- Imagem de Perfil (Caminho Revisado para .jpeg) -->
+                <!-- Imagem de Perfil -->
                 <div class="hero-image-wrapper lg:col-span-3 flex flex-col items-center justify-center z-10 mx-auto w-full max-w-sm md:max-w-md lg:max-w-none">
                     <div class="relative w-72 h-72 md:w-96 md:h-96">
                         <!-- Anel de Decoração Animado -->
                         <div class="profile-decoration-ring absolute w-[105%] h-[105%] border-2 border-dashed border-[#0058D9] rounded-full opacity-30 top-[-2.5%] left-[-2.5%]"></div>
                         <!-- Container da Imagem -->
                         <div class="profile-img-container w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl shadow-gray-400/20 relative z-20">
-                            <!-- Imagem de Perfil - REVISADO (Usando .jpeg) -->
+                            <!-- Imagem de Perfil - Caminho Revisado -->
                             <img src="https://raw.githubusercontent.com/rudhere/portifolio/main/rudhere.jpeg" alt="Rudhere Profile" class="profile-img w-full h-full object-cover object-center" onerror="this.onerror=null;this.src='https://placehold.co/400x400/E5E7EB/4B5563?text=Rudhere'">
                         </div>
                     </div>
@@ -212,10 +231,10 @@
             <!-- Grid de Projetos -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Projeto 1: Brenda Vieira - Web Design (Caminho Revisado para .png) -->
+                <!-- Projeto 1: Brenda Vieira - Web Design -->
                 <a href="#brenda-vieira" class="group bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border border-gray-100">
                     <div class="relative overflow-hidden h-72">
-                        <!-- Imagem do Projeto - REVISADO (Usando .png) -->
+                        <!-- Imagem do Projeto -->
                         <img src="https://raw.githubusercontent.com/rudhere/portifolio/main/Brenda%20pagina%20(2).png" alt="Layout do Website de Brenda Vieira" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/800x600/0058D9/FFFFFF?text=Brenda%20Website'">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#001F3F]/50 to-transparent"></div>
                     </div>
@@ -226,10 +245,10 @@
                     </div>
                 </a>
 
-                <!-- Projeto 2: Silune Design - Branding e Marketing (Caminho Revisado para .png) -->
+                <!-- Projeto 2: Silune Design - Branding e Marketing -->
                 <a href="#silune-design" class="group bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border border-gray-100">
                     <div class="relative overflow-hidden h-72">
-                        <!-- Imagem do Projeto - REVISADO (Usando .png e codificação de espaço/caractere) -->
+                        <!-- Imagem do Projeto -->
                         <img src="https://raw.githubusercontent.com/rudhere/portifolio/main/storys%20pre%C3%A7os%20silune%20(2).png" alt="Branding e Marketing Digital para Silune Design" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/800x600/001F3F/FFFFFF?text=Silune%20Branding'">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#001F3F]/50 to-transparent"></div>
                     </div>
@@ -240,10 +259,10 @@
                     </div>
                 </a>
 
-                <!-- Projeto 3: Chatbot + CRM Integrado (Caminho Revisado para .png) -->
+                <!-- Projeto 3: Chatbot + CRM Integrado -->
                 <a href="#automacao-case" class="group bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 border border-gray-100">
                     <div class="relative overflow-hidden h-72">
-                        <!-- Imagem do Projeto - REVISADO (Usando .png) -->
+                        <!-- Imagem do Projeto -->
                         <img src="https://raw.githubusercontent.com/rudhere/portifolio/main/chatbot%20e%20crm.png" alt="Case de Automação com Chatbot e CRM" class="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/800x600/001F3F/FFFFFF?text=Automa%C3%A7%C3%A3o+de+Processos'">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#001F3F]/50 to-transparent"></div>
                     </div>
@@ -304,5 +323,47 @@
         </div>
     </footer>
 
+    <script>
+        // Lógica para o Menu Mobile (Hambúrguer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const openMenuBtn = document.getElementById('mobile-menu-open');
+            const closeMenuBtn = document.getElementById('mobile-menu-close');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+            const openMenu = () => {
+                mobileMenu.classList.remove('hidden');
+                // Força a transição de opacidade no próximo frame
+                setTimeout(() => {
+                    mobileMenu.classList.add('opacity-100');
+                    document.body.style.overflow = 'hidden'; // Evita scroll do corpo
+                }, 10); 
+            };
+
+            const closeMenu = () => {
+                mobileMenu.classList.remove('opacity-100');
+                // Aguarda o fim da transição antes de esconder
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = ''; // Restaura scroll do corpo
+                }, 300); // Deve corresponder à duração da transição CSS
+            };
+
+            // Abre o menu
+            if (openMenuBtn) {
+                openMenuBtn.addEventListener('click', openMenu);
+            }
+
+            // Fecha o menu (ícone X)
+            if (closeMenuBtn) {
+                closeMenuBtn.addEventListener('click', closeMenu);
+            }
+
+            // Fecha o menu ao clicar em um link (navegação)
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+        });
+    </script>
 </body>
 </html>
